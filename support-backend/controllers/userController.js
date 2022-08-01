@@ -64,6 +64,10 @@ export const loginUser = asyncHandler(async (req, res) => {
 export const getMe = asyncHandler(async (req, res) => {
   console.log("get me controlller req.user ", req.user);
 
+  if (!req.user) {
+    res.status(401)
+    throw new Error('not Authorized')
+  }
   const {_id, email, name} = req.user
 
   const user = {
