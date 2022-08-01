@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node support-backend/server.js",
-    "server": "nodemon support-backend/server.js"
+    "server": "nodemon support-backend/server.js",
+    "client": "npm start --prefix support-frontend"
   },
   "author": "Jumgal Arymbaev",
   "license": "MIT",
