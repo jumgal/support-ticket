@@ -10,8 +10,8 @@ import {
 import protect from '../middleware/authMiddleware.js';
 
 // Re-route into note router
-// const noteRouter = require('./noteRoutes')
-// router.use('/:ticketId/notes', noteRouter)
+import {noteRoutes} from './noteRoutes.js'
+router.use('/:ticketId/notes', noteRoutes)
 
 router.route('/').get(protect, getTickets).post(protect, createTicket)
 

@@ -137,7 +137,6 @@ export const ticketSlice = createSlice({
         state.message = action.payload
       })
       .addCase(closeTicket.fulfilled, (state, action) => {
-        console.log('action from close ', action)
         state.isLoading = false
         state.tickets.map((ticket) =>
           ticket._id === action.payload._id

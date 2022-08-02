@@ -34,7 +34,6 @@ export const getTicket = asyncHandler(async (req, res) => {
   }
 
   const ticket = await Ticket.findById(req.params.id)
-   console.log('ticket controller get ticket ', ticket)
   if (!ticket) {
     res.status(404)
     throw new Error('Ticket not found')
@@ -90,8 +89,6 @@ export const deleteTicket = asyncHandler(async (req, res) => {
   }
 
   const ticket = await Ticket.findById(req.params.id)
-  console.log('ticket ', ticket)
-  console.log('type check ', typeof(ticket.user))
   if (!ticket) {
     res.status(404)
     throw new Error('Ticket not found')

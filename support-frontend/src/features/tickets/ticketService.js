@@ -11,7 +11,6 @@ const createTicket = async (ticketData, token) => {
   }
 
   const response = await axios.post(API_URL, ticketData, config)
-  console.log('response create ', response)
 
   return response.data
 }
@@ -38,7 +37,7 @@ const getTicket = async (ticketId, token) => {
   }
 
   const response = await axios.get(API_URL + ticketId, config)
-  console.log('get a single ticket from service - response ', response)
+
   return response.data
 }
 
