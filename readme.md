@@ -11,4 +11,28 @@ MERN STACK process:
    const PORT = process.env.PORT    process.env and env var name
 
 
+Deployment to Heroku
+
+1. Install Heroku CLI 
+2. login to Heroku from a Command Line - heroku login
+3. Serve Frontend
+
+// Serve Frontend
+if (process.env.NODE_ENV === 'production') {
+  // Set build folder as static
+  app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+  // FIX: below code fixes app crashing on refresh in deployment
+  app.get('*', (_, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
+  })
+} else {
+  app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Welcome to the Support Desk API' })
+  })
+}
+
+4. add script to a package.json file:  "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix support-frontend && npm run build --prefix support-frontend"
+
+5. push the code to remote repo
 

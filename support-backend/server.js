@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -18,9 +19,20 @@ app.use(express.urlencoded({extended: true}))
 app.use('/api/users', userRoutes)
 app.use('/api/tickets', ticketRoutes)
 
-app.get('/', (req, res) => {
-  res.status(200).json({message: "welcome to the developer's world!"})
-})
+// Serve Frontend
+if (process.env.NODE_ENV === 'production') {
+  // Set build folder as static
+  app.use(express.static(path.join(__dirname, '../support-frontend/build')))
+
+  // FIX: below code fixes app crashing on refresh in deployment
+  app.get('*', (_, res) => {
+    res.sendFile(path.join(__dirname, '../support-frontend/build/index.html'))
+  })
+} else {
+  app.get('/', (req, res) => {
+    res.status(200).json({ message: "welcome to the developer's world!" })
+  })
+}
 
 app.use(errorHandler)
 
